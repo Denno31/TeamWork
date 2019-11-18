@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 const db = require('../config/config');
 
 const auth = {
-  async verifyToken(req, res, next) {
+  async verifyToken (req, res, next) {
     const token = req.header('auth-token');
     if (!token) return res.status(400).json({ status: 'error', data: 'Access denied' });
     try {
@@ -14,10 +14,10 @@ const auth = {
       req.user = { userData: decodedToken.userId };
       next();
     } catch (error) {
-      return res.status(400).json({ status: 'error', data: err });
+      return res.status(400).json({ status: 'error', data: error });
     }
   },
-  async verifyTokenIsAdmin(req, res, next){
+  async verifyTokenIsAdmin (req, res, next) {
     const token = req.header('auth-token');
     if (!token) return res.status(400).json({ status: 'error', data: 'Access denied' });
     try {
@@ -28,7 +28,7 @@ const auth = {
       // req.user = { userData: decodedToken.userId };
       next();
     } catch (error) {
-      return res.status(400).json({ status: 'error', data: err });
+      return res.status(400).json({ status: 'error', data: error });
     }
 
   }

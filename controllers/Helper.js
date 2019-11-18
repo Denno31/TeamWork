@@ -39,8 +39,16 @@ const Helper = {
     const schema = {
       email: joi.string().required().email(),
       password: joi.string().required(),
-    }
+    };
     const validation = joi.validate(user, schema);
+    return validation;
+  },
+  validateArticle(article) {
+    const schema = {
+      title: joi.string().min(6).required(),
+      body: joi.string().min(30).required(),
+    };
+    const validation = joi.validate(article, schema);
     return validation;
   },
 };

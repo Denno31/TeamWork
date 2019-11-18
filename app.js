@@ -11,8 +11,10 @@ app.use(bodyParser.json());
 app.use(express.json());
 
 const userRoutes = require('./routes/user');
+const articleRoutes = require('./routes/article');
 
 app.use('/api/v1/user', userRoutes);
+app.use('/api/v1/article', articleRoutes);
 
 app.listen(port, () => console.log(`you are running on ${port}`));
 module.exports = app;
