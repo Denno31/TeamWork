@@ -51,5 +51,13 @@ const Helper = {
     const validation = joi.validate(article, schema);
     return validation;
   },
+  validateComment(comment) {
+    const schema = {
+      commentbody: joi.string().required(),
+    };
+    const validation = joi.validate(comment, schema);
+    return validation;
+  },
 };
+
 module.exports = Helper;
