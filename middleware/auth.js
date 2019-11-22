@@ -31,6 +31,17 @@ const auth = {
       return res.status(400).json({ status: 'error', data: error });
     }
 
+  }, 
+  async authorizeOwner (req, res) {
+    try {
+      const { id } = req.user.userData
+      const textQuery = 'SELECT id, role from users WHERE id= $1 or role= $2';
+      const { rows } = await db.query(textQuery, [id, 'admin']);
+      if (!rows[0]) return false
+      return true;
+    }catch(error){
+    return false;
   }
+}
 };
 module.exports = auth;

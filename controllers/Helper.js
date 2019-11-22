@@ -58,6 +58,14 @@ const Helper = {
     const validation = joi.validate(comment, schema);
     return validation;
   },
+  validateGif(gif) {
+    const schema = {
+      title: joi.string().required(),
+      gifurl: joi.string().required(),
+    }
+    const validation = joi.validate(gif, schema);
+    return validation;
+  },
 };
 
 module.exports = Helper;

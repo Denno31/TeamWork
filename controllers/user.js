@@ -7,7 +7,7 @@ exports.signUp = async (req, res) => {
   // validate user
   const { error } = Helper.validateUser(req.body);
   if (error) {
-    return res.send({ status: 'error', data: error.details[0].message });
+    return res.send({ status: 'error', data: {message: error.details[0].message } });
   }
   const {
     password, email, role, firstname, lastname, department, jobrole, address, gender,
@@ -30,8 +30,8 @@ exports.signUp = async (req, res) => {
   }
 };
 exports.login = async (req, res) => {
-  const { err } = Helper.validateLogin(req.body);
-  if (err) return res.send({ status: 'error', data: err.details[0].message });
+  const { error } = Helper.validateLogin(req.body);
+  if (error) return res.send({ status: 'error', data: error.details[0].message });
   const queryText = 'SELECT id, email, password, role FROM users where email=$1';
   try {
     const { rows } = await db.query(queryText, [req.body.email.toLowerCase()]);

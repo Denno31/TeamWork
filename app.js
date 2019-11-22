@@ -12,9 +12,11 @@ app.use(express.json());
 
 const userRoutes = require('./routes/user');
 const articleRoutes = require('./routes/article');
+const gifRoutes = require('./routes/gif');
 
 app.use('/api/v1/user', userRoutes);
 app.use('/api/v1/article', articleRoutes);
+app.use('/api/v1/gif', gifRoutes);
 
 app.listen(port, () => console.log(`you are running on ${port}`));
 module.exports = app;
