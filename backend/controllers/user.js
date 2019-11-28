@@ -35,10 +35,10 @@ exports.login = async (req, res) => {
   const queryText = 'SELECT id, email, password, role FROM users where email=$1';
   try {
     const { rows } = await db.query(queryText, [req.body.email.toLowerCase()]);
-    if (!rows[0]) return res.status(400).json({ status: 'err', data: 'The user does not exist' });
-    if (!Helper.comparePassword(rows[0].password, req.body.password)) return res.status(400).json({ status: 'error', data: 'wrong email or password' });
+    if (!rows[0]) return res.status(200).json({ status: 'err', data: 'The user does not exist' });
+    if (!Helper.comparePassword(rows[0].password, req.body.password)) return res.status(200).json({ status: 'error', data: 'wrong email or password' });
     const token = Helper.generateToken({ id: rows[0].id, email: rows[0].email, role: rows[0].role });
-    return res.status(200).header('auth-token', token).json({ status: 'success', token, data: { email: rows[0].email, userId: rows[0].id } });
+    return res.status(200).json({ status: 'success', token, data: { email: rows[0].email, userId: rows[0].id } });
   } catch (error) {
     return res.status(400).json({ status: 'err', data: error });
   }
